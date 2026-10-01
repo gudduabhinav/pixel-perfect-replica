@@ -144,3 +144,32 @@
     color: var(--color-foreground);
   }
 }
+
+@utility glass-panel {
+  background-color: var(--panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 10px 30px -12px oklch(0 0 0 / 55%);
+}
+
+@utility control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-foreground);
+  background-color: var(--panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(16px) saturate(140%);
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+@utility control-btn-active {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-color: transparent;
+}
