@@ -146,10 +146,10 @@ export function createWallMaterial(base: THREE.Texture, mask: THREE.Texture) {
       uMaskTexture: { value: mask },
       uTargetColor: {
         value: [
-          new THREE.Color("#ffffff"),
-          new THREE.Color("#ffffff"),
-          new THREE.Color("#ffffff"),
-          new THREE.Color("#ffffff"),
+          new THREE.Vector3(1, 1, 1),
+          new THREE.Vector3(1, 1, 1),
+          new THREE.Vector3(1, 1, 1),
+          new THREE.Vector3(1, 1, 1),
         ],
       },
       uStrength: { value: [0, 0, 0, 0] },
