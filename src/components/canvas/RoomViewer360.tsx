@@ -81,8 +81,9 @@ function useMaskSampler(url: string) {
     let best = -1;
     let bestVal = 40; // ignore near-empty mask pixels
     for (let c = 0; c < 4; c++) {
-      if (m.data[i + c] > bestVal) {
-        bestVal = m.data[i + c];
+      const v = m.data[i + c] ?? 0;
+      if (v > bestVal) {
+        bestVal = v;
         best = c;
       }
     }
@@ -113,7 +114,7 @@ function PanoSphere({
     for (let i = 0; i < 4; i++) {
       const hex = paint.colors[i];
       if (hex) {
-        u.uTargetColor.value[i].copy(hexToVec3(hex));
+        u.uTargetColor.value[i]?.copy(hexToVec3(hex));
         u.uStrength.value[i] = 1;
       } else {
         u.uStrength.value[i] = 0;

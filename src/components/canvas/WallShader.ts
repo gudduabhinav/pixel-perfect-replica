@@ -138,7 +138,22 @@ void main() {
 }
 `;
 
-export function createWallMaterial(base: THREE.Texture, mask: THREE.Texture) {
+export type WallUniforms = {
+  uBaseTexture: { value: THREE.Texture };
+  uMaskTexture: { value: THREE.Texture };
+  uTargetColor: { value: THREE.Vector3[] };
+  uStrength: { value: number[] };
+  uBlendMode: { value: number };
+  uReveal: { value: number };
+  uPaintOn: { value: number };
+  uResolution: { value: THREE.Vector2 };
+  uHighlight: { value: number };
+  uHighlightPulse: { value: number };
+};
+
+export type WallMaterial = THREE.ShaderMaterial & { uniforms: WallUniforms };
+
+export function createWallMaterial(base: THREE.Texture, mask: THREE.Texture): WallMaterial {
   return new THREE.ShaderMaterial({
     side: THREE.BackSide,
     uniforms: {
@@ -162,5 +177,5 @@ export function createWallMaterial(base: THREE.Texture, mask: THREE.Texture) {
     },
     vertexShader: wallVertexShader,
     fragmentShader: wallFragmentShader,
-  });
+  }) as WallMaterial;
 }

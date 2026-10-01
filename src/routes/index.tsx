@@ -40,7 +40,7 @@ function ViewerFallback() {
 }
 
 function Index() {
-  const [roomId, setRoomId] = useState(ROOMS[0].id);
+  const [roomId, setRoomId] = useState(ROOMS[0]!.id);
   const [surface, setSurface] = useState(0);
   const [colors, setColors] = useState<(string | null)[]>([null, null, null, null]);
   const [blend, setBlend] = useState<BlendMode>("softlight");
@@ -50,7 +50,7 @@ function Index() {
   const [selectedHex, setSelectedHex] = useState<string | null>(null);
 
   const apiRef = useRef<{ capture: () => string | null } | null>(null);
-  const room = ROOMS.find((r) => r.id === roomId) ?? ROOMS[0];
+  const room = ROOMS.find((r) => r.id === roomId) ?? ROOMS[0]!;
   const blendValue = BLEND_MODES.find((b) => b.id === blend)?.value ?? 2;
 
   const applyPaint = (paint: Paint) => {
@@ -164,7 +164,7 @@ function Index() {
             </button>
           ))}
           <span className="ml-2 pr-2 text-[11px] text-muted-foreground">
-            Painting: {SURFACES[surface].name}
+            Painting: {SURFACES[surface]?.name}
           </span>
         </div>
         <div className="w-full max-w-3xl">
