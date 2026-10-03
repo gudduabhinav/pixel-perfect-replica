@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { createWallMaterial } from "./WallShader";
 
@@ -182,14 +182,19 @@ function CaptureBridge({ onReady }: { onReady: ViewerProps["onReady"] }) {
 
 export default function RoomViewer360(props: ViewerProps) {
   const { onReady, ...rest } = props;
+  // Slow "look around the room" drift until the user takes control.
+  const [touring, setTouring] = useState(true);
   return (
     <Canvas
       className="h-full w-full"
       gl={{ preserveDrawingBuffer: true, antialias: true }}
-      camera={{ fov: 75, position: [0, 0, 0.1], near: 0.1, far: 1100 }}
+      camera={{ fov: 70, position: [0, 0, 0.1], near: 0.1, far: 1100 }}
     >
       <PanoSphere {...rest} />
       <OrbitControls
+        autoRotate={touring}
+        autoRotateSpeed={-0.35}
+        onStart={() => setTouring(false)}
         enableDamping
         dampingFactor={0.08}
         rotateSpeed={-0.32}
