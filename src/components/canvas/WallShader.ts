@@ -94,7 +94,7 @@ vec3 repaint(vec3 base, vec3 target) {
 
   // Luminance transfer: keep the photo's shading relative to the surface's
   // own average brightness, re-centred on the chosen paint lightness.
-  float shading = baseHsl.z - 0.72;            // deviation from a lit wall
+  float shading = baseHsl.z - 0.82;            // deviation from a lit wall
   float l = clamp(targetHsl.z + shading * (0.55 + 0.9 * targetHsl.z), 0.02, 0.99);
   vec3 hueSwapped = hsl2rgb(vec3(targetHsl.x, targetHsl.y, l));
 
