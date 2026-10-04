@@ -104,7 +104,7 @@ function Index() {
           <div className="glass-panel px-4 py-2">
             <h1 className="text-sm font-semibold tracking-tight text-foreground">Hue360</h1>
             <p className="text-[11px] text-muted-foreground">
-              Drag to look around · click a wall to select it
+              Drag 360° to see all four walls, floor & ceiling
             </p>
           </div>
           <RoomSwitcher activeId={roomId} onChange={setRoomId} />

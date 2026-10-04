@@ -1,9 +1,9 @@
-import panoLiving from "@/assets/pano-living-room.jpg";
-import panoBedroom from "@/assets/pano-bedroom.jpg";
-import panoKitchen from "@/assets/pano-kitchen.jpg";
-import maskLiving from "@/assets/mask-living-room.png";
-import maskBedroom from "@/assets/mask-bedroom.png";
-import maskKitchen from "@/assets/mask-kitchen.png";
+import panoLiving from "@/assets/pano-living-room-clean.jpg";
+import panoBedroom from "@/assets/pano-bedroom-clean.jpg";
+import panoDining from "@/assets/pano-dining-clean.jpg";
+import maskLiving from "@/assets/mask-living-room-clean.png";
+import maskBedroom from "@/assets/mask-bedroom-clean.png";
+import maskDining from "@/assets/mask-dining-clean.png";
 
 export type Room = {
   id: string;
@@ -15,14 +15,14 @@ export type Room = {
 export const ROOMS: Room[] = [
   { id: "living", name: "Living Room", pano: panoLiving, mask: maskLiving },
   { id: "bedroom", name: "Modern Bedroom", pano: panoBedroom, mask: maskBedroom },
-  { id: "kitchen", name: "Minimalist Kitchen", pano: panoKitchen, mask: maskKitchen },
+  { id: "dining", name: "Dining Room", pano: panoDining, mask: maskDining },
 ];
 
 /** Mask channel index -> paintable surface. */
 export const SURFACES = [
-  { index: 0, name: "Wall A" },
-  { index: 1, name: "Wall B" },
-  { index: 2, name: "Accent Wall" },
+  { index: 0, name: "Left Wall" },
+  { index: 1, name: "Front Wall" },
+  { index: 2, name: "Right & Back Wall" },
   { index: 3, name: "Ceiling" },
 ] as const;
 
