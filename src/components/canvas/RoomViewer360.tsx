@@ -105,6 +105,7 @@ function PanoSphere({
   const maskTex = useTexture(mask, false);
   const sample = useMaskSampler(mask);
   const { size } = useThree();
+  const pulseTime = useRef(0);
 
   const material = useMemo(() => createWallMaterial(base, maskTex), [base, maskTex]);
   useEffect(() => () => material.dispose(), [material]);
@@ -133,9 +134,10 @@ function PanoSphere({
     );
   }, [material, size]);
 
-  useFrame(({ state }) => {
+  useFrame((_, delta) => {
+    pulseTime.current += Math.min(delta, 0.05);
     material.uniforms.uHighlightPulse.value =
-      highlight === null ? 0 : 0.5 + 0.5 * Math.sin(state.clock.elapsedTime * 4);
+      highlight === null ? 0 : 0.5 + 0.5 * Math.sin(pulseTime.current * 4);
   });
 
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
