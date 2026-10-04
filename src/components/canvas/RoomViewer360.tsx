@@ -105,6 +105,7 @@ function PanoSphere({
   const maskTex = useTexture(mask, false);
   const sample = useMaskSampler(mask);
   const { size } = useThree();
+  const pulseTime = useRef(0);
 
   const material = useMemo(() => createWallMaterial(base, maskTex), [base, maskTex]);
   useEffect(() => () => material.dispose(), [material]);
@@ -133,9 +134,10 @@ function PanoSphere({
     );
   }, [material, size]);
 
-  useFrame(({ clock }) => {
+  useFrame((_, delta) => {
+    pulseTime.current += Math.min(delta, 0.05);
     material.uniforms.uHighlightPulse.value =
-      highlight === null ? 0 : 0.5 + 0.5 * Math.sin(clock.elapsedTime * 4);
+      highlight === null ? 0 : 0.5 + 0.5 * Math.sin(pulseTime.current * 4);
   });
 
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
@@ -188,20 +190,20 @@ export default function RoomViewer360(props: ViewerProps) {
     <Canvas
       className="h-full w-full"
       gl={{ preserveDrawingBuffer: true, antialias: true }}
-      camera={{ fov: 70, position: [0, 0, 0.1], near: 0.1, far: 1100 }}
+      camera={{ fov: 74, position: [0, 0, 0.1], near: 0.1, far: 1100 }}
     >
       <PanoSphere {...rest} />
       <OrbitControls
         autoRotate={touring}
-        autoRotateSpeed={-0.35}
+        autoRotateSpeed={-0.45}
         onStart={() => setTouring(false)}
         enableDamping
         dampingFactor={0.08}
         rotateSpeed={-0.32}
         enableZoom={false}
         enablePan={false}
-        minPolarAngle={0.35}
-        maxPolarAngle={Math.PI - 0.35}
+        minPolarAngle={0.12}
+        maxPolarAngle={Math.PI - 0.12}
       />
       <FovZoom />
       <CaptureBridge onReady={onReady} />
